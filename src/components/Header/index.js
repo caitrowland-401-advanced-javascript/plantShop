@@ -10,11 +10,10 @@ const mapStateToProps = state => {
 
 const Header = (props) => {
     return (
-        <>
+        <section class="header">
             <h1>Welcome to the Greenhouse</h1>
-            <p>you have {props.shoppingCart} items in your cart</p>
-
-        </>
+            <p>{props.shoppingCart} items cart</p>
+        </section>
 
     )
 
