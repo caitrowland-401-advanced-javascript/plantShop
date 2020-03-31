@@ -1,10 +1,8 @@
 import React from 'react'
 import { Table, Button } from "react-bootstrap"
 import { connect } from 'react-redux'
-// import { If } from '../If/If'
 import './products.scss'
-import { addToCart } from '../../Reducers/cartReducer'
-import {decrement} from '../../Reducers/productReducer'
+import { addToCart } from '../../Actions'
 
 const mapStateToProps = state => {
     return {
@@ -13,7 +11,7 @@ const mapStateToProps = state => {
     }
 }
 
-const mapDispatchToProps = { addToCart, decrement }
+const mapDispatchToProps = { addToCart }
 
 const Products = props => {
     return (

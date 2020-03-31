@@ -6,7 +6,8 @@ const initialState = {
 const shoppingCart = (state = initialState, action) => {
     let totalItems, products
     switch (action.type) {
-        case 'INCREMENT':
+        // case 'DECREMENT':
+        case 'ADD_TO_CART':
             products = [...state.products, action.payload]
             totalItems = state.totalItems + 1
             return {totalItems, products}
@@ -16,10 +17,3 @@ const shoppingCart = (state = initialState, action) => {
 }
 
 export default shoppingCart
-
-export function addToCart(product) {
-    return {
-        type: 'INCREMENT',
-        payload: product
-    }
-}
