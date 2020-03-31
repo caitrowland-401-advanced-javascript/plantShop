@@ -2,7 +2,6 @@ import React from 'react'
 import { Nav } from "react-bootstrap"
 import { connect } from 'react-redux'
 import { setActive } from '../../Actions/categoryActions'
-import { If } from '../If/If'
 import './categories.scss'
 
 
@@ -22,16 +21,10 @@ const Categories = props => {
         >
             {props.categories.map(category => {
                 return (
-                    <Nav.Item onClick={() => { props.setActive(category.name) }}>
-                        <If condition={category.name === props.activeCategory}>
-                            <Nav.Link className="active">
+                    <Nav.Item onClick={() => { props.setActive(props.activeCategory === category.name ? '' : category.name) }}>
+                            <Nav.Link className={category.name === props.activeCategory ? 'active' : 'inactive'}>
                                 {category.displayName}
-                            </Nav.Link>
-
-                        </If>
-                        <If condition={category.name !== props.activeCategory}>
-                            <Nav.Link className="inactive">{category.displayName}</Nav.Link>
-                        </If> 
+                        </Nav.Link>
                     </Nav.Item>
                 )
             })}

@@ -1,5 +1,6 @@
 import React from 'react';
 import './App.scss';
+import Header from '../Header'
 import Categories from '../Categories';
 import Products from '../Products'
 import { Container } from 'react-bootstrap';
@@ -12,7 +13,7 @@ function App() {
 
     <Provider store={store}>
       <Container className="App">
-        <h1>Welcome to the Greenhouse</h1>
+        <Header />
         <Categories />
         <Products />
       </Container>

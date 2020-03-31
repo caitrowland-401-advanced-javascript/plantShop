@@ -1,14 +1,14 @@
 import { createStore, combineReducers} from 'redux'
-import {composeWithDevTools} from 'redux-devtools-extension'
+import { composeWithDevTools } from 'redux-devtools-extension'
+
 import categoryReducer from '../Reducers/categoryReducer'
 import productReducer from '../Reducers/productReducer'
-import { act } from 'react-dom/test-utils'
-import activeCategory from '../Reducers/activeCategory'
+import shoppingCart from '../Reducers/cartReducer'
 
 const reducers = combineReducers({
-   categories: categoryReducer, 
+    categories: categoryReducer, 
     products: productReducer,
-    activeCategory: activeCategory
+    shoppingCart: shoppingCart
 })
 
 const store = () => {

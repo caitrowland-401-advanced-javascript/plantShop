@@ -1,14 +1,19 @@
 import React from 'react'
 import { Table, Button } from "react-bootstrap"
 import { connect } from 'react-redux'
-import { If } from '../If/If'
+// import { If } from '../If/If'
+import './products.scss'
+import { addToCart } from '../../Reducers/cartReducer'
+import {decrement} from '../../Reducers/productReducer'
 
 const mapStateToProps = state => {
     return {
         products: state.products,
-        activeCategory: state.categories.activeCategory
+        shoppingCart: state.shoppingCart.totalItems
     }
 }
+
+const mapDispatchToProps = { addToCart, decrement }
 
 const Products = props => {
     return (
@@ -19,36 +24,27 @@ const Products = props => {
                         <th>Name</th>
                         <th>Description</th>
                         <th>Price</th>
-                        <th>Inventory</th>
+                        <th>In Stock</th>
                     </tr>
                 </thead>
                 <tbody>
-                    {props.products.products.map(product => (
+                    {props.products.map(product => (
                         <tr key={product.name}>
-                            <If condition={product.category === props.activeCategory}>
                                 <td>{product.name}</td>
                                 <td>{product.description}</td>
-                                <td>{product.price}</td>
-                                <td>{product.inventory}</td>
-                                <td><Button>Add to Cart</Button></td>
-                            </If>
-                            <If condition={!props.activeCategory}>
-                                <td>{product.name}</td>
-                                <td>{product.description}</td>
-                                <td>{product.price}</td>
-                                <td>{product.inventory}</td>
-                                <td><Button>Add to Cart</Button></td>
-                            </If>
+                                <td>${product.price}</td>
+                                <td>{product.inventory} items</td>
+                                <td><Button onClick={() => props.addToCart({ product })}>Add to Cart</Button></td>
+
                         </tr>
                     ))}
                 </tbody>
             </Table>
         </section>
     )
-
 }
 
 
 
 
-export default connect(mapStateToProps)(Products)
+export default connect(mapStateToProps, mapDispatchToProps)(Products)

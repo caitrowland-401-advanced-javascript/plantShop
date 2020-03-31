@@ -1,5 +1,4 @@
-const initialState = {
-    products: [
+const initialState = [
         {category:'indoor', name: 'Fiddle Leaf Fig',  description:'Large, needs bright indirect sunlight', price:120, inventory: 20},
         {category:'indoor', name: 'Bannana Leaf Tree',  description:'Large, banana like leaves', price:70, inventory: 17},
         {category:'indoor', name: 'Areca Palm Tree',  description:'2-3ft tall, thrives in low light conditons', price:65, inventory: 25},
@@ -11,14 +10,19 @@ const initialState = {
         {category: 'special', name:'Flower', description: 'rotates daily.', price:20, inventory: 420},
         {category: 'special', name:'Edible', description: 'rotates daily.', price:30, inventory: 420}
     ]
-}
 
 const productReducer = (state=initialState, action) => {
-    // let products;
     switch(action.type) {
-        case 'FILTER' : 
-        const products = initialState.filter(product => product.category === action.payload)
-        return {products}
+        case 'SETACTIVE': 
+            if (action.payload === '') return initialState 
+            const products = initialState.filter(product => product.category === action.payload)
+            return products 
+        // case 'DECREMENT':
+        //     return initialState.products.map(product =>
+        //         product.name === action.payload
+        //             ? { ...product, inventory: product.inventory - 1 }
+        //             : product
+        //     )
         default:
             return state
     }
@@ -28,10 +32,10 @@ export default productReducer
 
 //action creators 
 
-export function filterProducts(name) {
-    return{
-        type: 'FILTER', 
-        payload: name
-    } 
 
+export function decrement(product) {
+    return {
+        type: 'DECREMENT',
+        payload: product
+    };
 }
