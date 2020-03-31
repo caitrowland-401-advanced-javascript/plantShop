@@ -1,9 +1,15 @@
 import { createStore, combineReducers} from 'redux'
 import {composeWithDevTools} from 'redux-devtools-extension'
-import activeCategory from './activeCategory'
-import productToShow from './products'
+import categoryReducer from '../Reducers/categoryReducer'
+import productReducer from '../Reducers/productReducer'
+import { act } from 'react-dom/test-utils'
+import activeCategory from '../Reducers/activeCategory'
 
-const reducers = combineReducers({activeCategory, productToShow })
+const reducers = combineReducers({
+   categories: categoryReducer, 
+    products: productReducer,
+    activeCategory: activeCategory
+})
 
 const store = () => {
     return createStore(reducers, composeWithDevTools() )

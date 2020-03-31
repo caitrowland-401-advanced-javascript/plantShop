@@ -1,18 +1,17 @@
 import React from 'react'
 import { Table, Button } from "react-bootstrap"
 import { connect } from 'react-redux'
-import { filterProducts } from '../../store/products'
-import { setActive, reset} from '../../store/activeCategory'
-import Categories from '../Categories'
-// import Products from '../Products'
+import { If } from '../If/If'
 
-// let activeCategory
 const mapStateToProps = state => {
-    return {productToShow : state.productToShow }
+    return {
+        products: state.products,
+        activeCategory: state.categories.activeCategory
+    }
 }
 
 const Products = props => {
-    return(
+    return (
         <section className="Products">
             <Table>
                 <thead>
@@ -24,12 +23,22 @@ const Products = props => {
                     </tr>
                 </thead>
                 <tbody>
-                    {props.productToShow.products.map(product => (
+                    {props.products.products.map(product => (
                         <tr key={product.name}>
-                        <td>{product.name}</td>
-                        <td>{product.description}</td>
-                        <td>{product.price}</td>
-                        <td>{product.inventory}</td>
+                            <If condition={product.category === props.activeCategory}>
+                                <td>{product.name}</td>
+                                <td>{product.description}</td>
+                                <td>{product.price}</td>
+                                <td>{product.inventory}</td>
+                                <td><Button>Add to Cart</Button></td>
+                            </If>
+                            <If condition={!props.activeCategory}>
+                                <td>{product.name}</td>
+                                <td>{product.description}</td>
+                                <td>{product.price}</td>
+                                <td>{product.inventory}</td>
+                                <td><Button>Add to Cart</Button></td>
+                            </If>
                         </tr>
                     ))}
                 </tbody>
@@ -41,6 +50,5 @@ const Products = props => {
 
 
 
-const mapDispatchToProps = {filterProducts}
 
-export default connect(mapStateToProps, mapDispatchToProps)(Products)
+export default connect(mapStateToProps)(Products)

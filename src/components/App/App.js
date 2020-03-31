@@ -12,7 +12,7 @@ function App() {
 
     <Provider store={store}>
       <Container className="App">
-        <h1>Welcome to the pot shop</h1>
+        <h1>Welcome to the Greenhouse</h1>
         <Categories />
         <Products />
       </Container>

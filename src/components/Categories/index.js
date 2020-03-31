@@ -1,41 +1,42 @@
 import React from 'react'
-import { Table, Button } from "react-bootstrap"
+import { Nav } from "react-bootstrap"
 import { connect } from 'react-redux'
-import { setActive, reset} from '../../store/activeCategory'
+import { setActive } from '../../Actions/categoryActions'
+import { If } from '../If/If'
+import './categories.scss'
 
 
 const mapStateToProps = state => {
-    return {activeCategory : state.activeCategory }
+    return {
+        categories: state.categories.categories,
+        activeCategory: state.categories.activeCategory
+    }
 }
+
+const mapDispatchToProps = { setActive }
 
 const Categories = props => {
-    return(
-        <section className="Categories">
-            <Table>
-                <thead>
-                    <tr>
-                        <th>Name</th>
-                        <th>Description</th>
-                        <th>View Products</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    {props.activeCategory.categories.map(category => (
-                        <tr key={category.name}>
-                        <td>{category.displayName}</td>
-                        <td>{category.description}</td>
-                        <td><Button variant='outline-primary' onClick={()=>{props.setActive(category.name)}}>View Products</Button></td>
-                        </tr>
-                    ))}
-                </tbody>
-            </Table>
-        </section>
+    return (
+        <Nav 
+        className="Categories"
+        >
+            {props.categories.map(category => {
+                return (
+                    <Nav.Item onClick={() => { props.setActive(category.name) }}>
+                        <If condition={category.name === props.activeCategory}>
+                            <Nav.Link className="active">
+                                {category.displayName}
+                            </Nav.Link>
+
+                        </If>
+                        <If condition={category.name !== props.activeCategory}>
+                            <Nav.Link className="inactive">{category.displayName}</Nav.Link>
+                        </If> 
+                    </Nav.Item>
+                )
+            })}
+        </Nav>
     )
-
 }
-
-
-
-const mapDispatchToProps = {setActive, reset}
 
 export default connect(mapStateToProps, mapDispatchToProps)(Categories)
