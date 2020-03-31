@@ -26,10 +26,10 @@ function App() {
         </Row>
 
         <Row>
-          <Col>
+          <Col sm={10}>
             <Products />
           </Col>
-          <Col>
+          <Col sm={2}>
             <SimpleCart />
           </Col>
         </Row>
