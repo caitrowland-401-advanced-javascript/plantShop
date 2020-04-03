@@ -10,16 +10,17 @@ const mapStateToProps = state => {
 }
 
 const SimpleCart = props => {
+        
     return (
-        <section className = "Cart">
-        <h2>Your cart:</h2>
-        <ul>
-            {props.shoppingCart.map(product => (
-                <li key={product.name}>{product.name}</li>
-            ))}
-            </ul>
-                </section>
-    )
+            <section className = "Cart">
+            <h2>Your cart:</h2>
+            <ul>
+                {props.shoppingCart.map(product => (
+                    <li key={product.name}>{product.name}</li>
+                ))}
+                </ul>
+                    </section>
+        )
 
 }
 
