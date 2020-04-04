@@ -1,1 +1,0 @@
-export const If = props => props.condition ? props.children : null

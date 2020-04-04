@@ -31,13 +31,14 @@ useEffect(() => productFetcher(), [])
 
 return (
     <section className="Products">
-        <Table>
+        <Table className ="product_table">
             <thead>
                 <tr>
                     <th>Name</th>
                     <th>Description</th>
                     <th>Price</th>
                     <th>In Stock</th>
+                    <th />
                 </tr>
             </thead>
             <tbody>
@@ -47,7 +48,7 @@ return (
                         <td>{product.description}</td>
                         <td>${product.price}</td>
                         <td>{product.inventory} items</td>
-                        <td><Button onClick={() => addToCart({ product })}>Add to Cart</Button></td>
+                        <td><Button onClick={() => addToCart({ product })} className={product.inventory > 0 ? 'show' : 'outOfStock'}>Add to Cart</Button></td>
 
                     </tr>
                 ))}
