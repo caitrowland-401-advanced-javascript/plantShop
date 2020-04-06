@@ -1,45 +1,60 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import { Table, Button } from "react-bootstrap"
 import { connect } from 'react-redux'
 import './products.scss'
-import { addToCart } from '../../Actions'
+import { getAllProducts, addToCart } from '../../Actions'
 
 const mapStateToProps = state => {
     return {
-        products: state.products,
-        shoppingCart: state.shoppingCart.totalItems
+
+        shoppingCart: state.shoppingCart.totalItems,
+
+        products:
+            state.activeCategory === ''
+            ? state.products
+            : state.products.filter(product => product.category === state.activeCategory)
     }
 }
 
-const mapDispatchToProps = { addToCart }
 
-const Products = props => {
-    return (
-        <section className="Products">
-            <Table>
-                <thead>
-                    <tr>
-                        <th>Name</th>
-                        <th>Description</th>
-                        <th>Price</th>
-                        <th>In Stock</th>
+const mapDispatchToProps = { getAllProducts, addToCart }
+
+const Products = ({ products, getAllProducts, shoppingCart, addToCart }) => {
+
+const productFetcher = function () {
+    getAllProducts()
+}
+
+// eslint-disable-next-line react-hooks/exhaustive-deps
+useEffect(() => productFetcher(), [])
+
+
+return (
+    <section className="Products">
+        <Table>
+            <thead>
+                <tr>
+                    <th>Name</th>
+                    <th>Description</th>
+                    <th>Price</th>
+                    <th>In Stock</th>
+                </tr>
+            </thead>
+            <tbody>
+                {products.map(product => (
+                    <tr key={product.id}>
+                        <td>{product.name}</td>
+                        <td>{product.description}</td>
+                        <td>${product.price}</td>
+                        <td>{product.inventory} items</td>
+                        <td><Button onClick={() => addToCart({ product })}>Add to Cart</Button></td>
+
                     </tr>
-                </thead>
-                <tbody>
-                    {props.products.map(product => (
-                        <tr key={product.name}>
-                                <td>{product.name}</td>
-                                <td>{product.description}</td>
-                                <td>${product.price}</td>
-                                <td>{product.inventory} items</td>
-                                <td><Button onClick={() => props.addToCart({ product })}>Add to Cart</Button></td>
-
-                        </tr>
-                    ))}
-                </tbody>
-            </Table>
-        </section>
-    )
+                ))}
+            </tbody>
+        </Table>
+    </section>
+)
 }
 
 

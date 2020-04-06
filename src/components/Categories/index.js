@@ -1,28 +1,36 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import { Nav } from "react-bootstrap"
 import { connect } from 'react-redux'
-import { setActive } from '../../Actions'
+import { getAllCategories, setActive } from '../../Actions'
 import './categories.scss'
 
 
 const mapStateToProps = state => {
     return {
-        categories: state.categories.categories,
-        activeCategory: state.categories.activeCategory
+        categories: state.categories,
+        activeCategory: state.activeCategory
     }
 }
 
-const mapDispatchToProps = { setActive }
+const mapDispatchToProps = { getAllCategories, setActive }
 
-const Categories = props => {
+const Categories = ({ categories, activeCategory, getAllCategories, setActive }) => {
+    
+    const categoriesFetcher = function () {
+        getAllCategories()
+    }
+
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+    useEffect(() => categoriesFetcher(), [])
+
     return (
         <Nav 
         className="Categories"
         >
-            {props.categories.map(category => {
+            {categories.categories.map(category => {
                 return (
-                    <Nav.Item onClick={() => { props.setActive(props.activeCategory === category.name ? '' : category.name) }}>
-                            <Nav.Link className={category.name === props.activeCategory ? 'active' : 'inactive'}>
+                    <Nav.Item onClick={() => { setActive(activeCategory === category.name ? '' : category.name) }}>
+                            <Nav.Link className={category.name === activeCategory ? 'active' : 'inactive'}>
                                 {category.displayName}
                         </Nav.Link>
                     </Nav.Item>

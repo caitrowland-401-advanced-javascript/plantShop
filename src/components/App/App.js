@@ -18,9 +18,7 @@ function App() {
     <Provider store={store}>
       <Container className="App">
           <Header />
-
           <Categories />
-
         <Row>
           <Col sm={10}>
             <Products />
