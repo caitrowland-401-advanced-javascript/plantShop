@@ -20,9 +20,7 @@ const toolbar = props => (
             <div className="spacer" />
             <div className="toolbar_navigation-items">
                 <ul>
-                    <li><a href="/">Products</a></li>
-                    <li><a href="/">Cart({props.shoppingCart})</a></li>
-
+                    <li onClick={props.cartClickHandler}>Cart({props.shoppingCart})</li>
                 </ul>
             </div>
         </nav>
