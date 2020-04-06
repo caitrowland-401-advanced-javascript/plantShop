@@ -1,7 +1,7 @@
 import React from 'react'
 import { Nav } from "react-bootstrap"
 import { connect } from 'react-redux'
-import { setActive } from '../../Actions/categoryActions'
+import { setActive } from '../../Actions'
 import './categories.scss'
 
 
