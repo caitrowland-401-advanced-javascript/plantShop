@@ -1,0 +1,23 @@
+
+.outOfStock {
+        display: none;
+
+}
+
+.product_table {
+    box-sizing: border-box;
+    outline: none;
+    margin-top: 80px;
+    background-color: rgba(255,255,255, .7);
+    border: 1px solid darkgreen;
+    // border-radius: 25px;
+}
+
+.show {
+    background-color: darkgreen;
+}
+
+th {
+    background-color: green;
+    color: white;
+}

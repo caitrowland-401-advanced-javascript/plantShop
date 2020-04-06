@@ -7,7 +7,7 @@ import './categories.scss'
 
 const mapStateToProps = state => {
     return {
-        categories: state.categories,
+        categories: state.categories.categories,
         activeCategory: state.activeCategory
     }
 }
@@ -27,7 +27,7 @@ const Categories = ({ categories, activeCategory, getAllCategories, setActive })
         <Nav 
         className="Categories"
         >
-            {categories.categories.map(category => {
+            {categories.map(category => {
                 return (
                     <Nav.Item onClick={() => { setActive(activeCategory === category.name ? '' : category.name) }}>
                             <Nav.Link className={category.name === activeCategory ? 'active' : 'inactive'}>
