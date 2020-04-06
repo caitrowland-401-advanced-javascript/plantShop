@@ -12,7 +12,12 @@ const productReducer = (allProducts = initialState, action) => {
                     ? { ...product, inventory: product.inventory - 1 }
                     : product
             )
-
+        case 'REMOVE_FROM_CART':
+            return allProducts.map(product => 
+                product.name === action.payload.name
+                ? { ...product, inventory: product.inventory + 1 }
+                    : product
+            )
         default:
             return allProducts
     }

@@ -7,7 +7,7 @@ import { getAllProducts, addToCart } from '../../Actions'
 const mapStateToProps = state => {
     return {
 
-        shoppingCart: state.shoppingCart.totalItems,
+        // shoppingCart: state.shoppingCart.totalItems,
 
         products:
             state.activeCategory === ''
@@ -19,7 +19,7 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = { getAllProducts, addToCart }
 
-const Products = ({ products, getAllProducts, shoppingCart, addToCart }) => {
+const Products = ({ products, getAllProducts, addToCart }) => {
 
 const productFetcher = function () {
     getAllProducts()

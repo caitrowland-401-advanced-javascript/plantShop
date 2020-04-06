@@ -1,9 +1,9 @@
 body {
   background-image: url("../../Assets/background.jpg");
   background-repeat: no-repeat;
-  background-size: cover;
+  background-size: 100%;
   background-position: center;
-
+  min-height: 1000px;
 }
 
 // .App {
